@@ -23,7 +23,7 @@ const Proyecto = ({ proyecto }) => {
         type="button"
         className="btn btn-blank"
         // TODO: En vez de pasar el id y luego ejecutar un .fliter() desde reducer para sacar el objeto proyecto seleccionado desde aquí, se le puede pasar el proyecto entero y asignarlo directamente al state sin hacer el .filter()
-        onClick={() => seleccionarProyecto(proyecto.id)}
+        onClick={() => seleccionarProyecto(proyecto._id)}
       >
         {proyecto.nombre}
       </button>

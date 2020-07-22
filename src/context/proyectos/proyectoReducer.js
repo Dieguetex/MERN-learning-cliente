@@ -2,6 +2,7 @@ import {
   FORMULARIO_PROYECTO,
   OBTENER_PROYECTOS,
   AÑADIR_PROYECTOS,
+  PROYECTO_ERROR,
   VALIDAR_FORMULARIO,
   PROYECTO_ACTUAL,
   ELIMINAR_PROYECTO,
@@ -40,7 +41,7 @@ export default (state, action) => {
         ...state,
         // TODO: En vez de recibir el id y luego ejecutar un .fliter() para sacar el objeto proyecto seleccionado, se puede recibir el proyecto entero y asignarlo directamente al state sin hacer el .filter(). Se deja el .filter() para observar la posibilidad de ejecutar operaciones en reducer.
         proyecto: state.proyectos.filter(
-          (proyecto) => proyecto.id === action.payload
+          (proyecto) => proyecto._id === action.payload
         ),
       };
 
@@ -48,9 +49,15 @@ export default (state, action) => {
       return {
         ...state,
         proyectos: state.proyectos.filter(
-          (proyecto) => proyecto.id !== action.payload
+          (proyecto) => proyecto._id !== action.payload
         ),
         proyecto: null,
+      };
+
+    case PROYECTO_ERROR:
+      return {
+        ...state,
+        mensaje: action.payload,
       };
 
     default:
