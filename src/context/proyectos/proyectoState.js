@@ -10,6 +10,7 @@ import {
   PROYECTO_ERROR,
   VALIDAR_FORMULARIO,
   PROYECTO_ACTUAL,
+  RESET_PROYECTO_ACTUAL,
   ELIMINAR_PROYECTO,
 } from "../../types/index";
 
@@ -91,6 +92,14 @@ const ProyectoState = (props) => {
     });
   };
 
+  // deselecciona el proyecto al que el usuario hizo click
+  const resetProyectoActual = () => {
+    dispatch({
+      type: RESET_PROYECTO_ACTUAL,
+      payload: null,
+    });
+  };
+
   // Elimina un proyecto
   const eliminarProyecto = async (proyectoId) => {
     try {
@@ -125,6 +134,7 @@ const ProyectoState = (props) => {
         añadirProyecto,
         mostrarError,
         proyectoActual,
+        resetProyectoActual,
         eliminarProyecto,
       }}
     >

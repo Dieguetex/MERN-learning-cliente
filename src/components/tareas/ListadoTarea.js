@@ -5,6 +5,8 @@ import tareaContext from "../../context/tareas/tareaContext";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const ListadoTareas = () => {
+  // Prevenir el warning de StrictMode y FindDOMNode
+  const nodeRef = React.useRef(null);
   // Obtener el state de proyectos
   const proyectosContext = useContext(proyectoContext);
   const { proyecto, eliminarProyecto } = proyectosContext;
@@ -36,7 +38,12 @@ const ListadoTareas = () => {
         ) : (
           <TransitionGroup>
             {tareasProyecto.map((tarea) => (
-              <CSSTransition key={tarea.id} timeout={200} classNames="tarea">
+              <CSSTransition
+                nodeRef={nodeRef}
+                key={tarea._id}
+                timeout={200}
+                classNames="tarea"
+              >
                 <Tarea tarea={tarea} />
               </CSSTransition>
             ))}

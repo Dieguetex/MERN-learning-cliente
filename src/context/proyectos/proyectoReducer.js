@@ -5,6 +5,7 @@ import {
   PROYECTO_ERROR,
   VALIDAR_FORMULARIO,
   PROYECTO_ACTUAL,
+  RESET_PROYECTO_ACTUAL,
   ELIMINAR_PROYECTO,
 } from "../../types/index";
 
@@ -43,6 +44,12 @@ export default (state, action) => {
         proyecto: state.proyectos.filter(
           (proyecto) => proyecto._id === action.payload
         ),
+      };
+
+    case RESET_PROYECTO_ACTUAL:
+      return {
+        ...state,
+        proyecto: null,
       };
 
     case ELIMINAR_PROYECTO:

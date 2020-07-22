@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useContext } from "react";
 import AuthContext from "./authContext";
 import AuthReducer from "./authReducer";
 
@@ -13,8 +13,13 @@ import {
   LOGIN_ERROR,
   CERRAR_SESION,
 } from "../../types";
+import proyectoContext from "../proyectos/proyectoContext";
 
 const AuthState = (props) => {
+  // Obtener el state de proyectos
+  const proyectosContext = useContext(proyectoContext);
+  const { resetProyectoActual } = proyectosContext;
+
   const initialState = {
     token: localStorage.getItem("token"),
     autenticado: null,
@@ -28,7 +33,6 @@ const AuthState = (props) => {
   const registrarUsuario = async (datos) => {
     try {
       const respuesta = await clienteAxios.post("/api/usuarios", datos);
-      console.log(respuesta.data);
 
       dispatch({
         type: REGISTRO_EXITOSO,
@@ -100,8 +104,9 @@ const AuthState = (props) => {
     }
   };
 
-  // CIerra la sesión del usuario
+  // Cierra la sesión del usuario
   const cerrarSesion = () => {
+    resetProyectoActual();
     dispatch({
       type: CERRAR_SESION,
     });
